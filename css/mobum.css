@@ -2,6 +2,7 @@ body,
 html {
   padding: 0;
   margin: 0;
+  font:400 1em/1.8 Avenir, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 }
 ul {
   padding: 0;
@@ -26,8 +27,7 @@ li {
 }
 #frames >li >.image {
   position: fixed;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -45,5 +45,5 @@ li {
   width: 100%;
   box-sizing: border-box;
   text-shadow: 0 0 2px #000;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.7);
 }
