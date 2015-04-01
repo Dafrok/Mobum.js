@@ -134,7 +134,7 @@
     function animateGo(frame){
         if(!frame){
             frame=0;
-            $.getJSON("/data/mobum.json",function(data){
+            $.getJSON("../data/mobum.json",function(data){
                 animateInit(data)
                 mobumData=data
                 var max=mobumData.frames.length,
