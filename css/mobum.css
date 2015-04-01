@@ -34,6 +34,10 @@ li {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+#frames >li >.image img {
+  width: 100%;
+  height: 100%;
+}
 #frames >li >div+div {
   position: fixed;
   bottom: 0;
