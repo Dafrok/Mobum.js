@@ -1,5 +1,4 @@
 (function($){
-
     var animation={
         animateFixed:[
             'bounce',
