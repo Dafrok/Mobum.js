@@ -36,6 +36,8 @@ li {
       */
 }
 #frames >li >.image img {
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
   box-sizing: border-box;
   border: 10px solid #f2f2f2;
   position: absolute;

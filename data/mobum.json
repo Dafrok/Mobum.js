@@ -1,5 +1,6 @@
 {
-  "delay": 2000,
+  "delay": 4000,
+  "delayToggle":2000,
   "frames": [
     {
       "img": "../img/img-1.png",

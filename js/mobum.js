@@ -1,4 +1,5 @@
-(function($){
+var Mobum=(function($){
+    var AjaxUrl=""
     var animation={
         animateFixed:[
             'bounce',
@@ -142,11 +143,13 @@
                 .css("opacity",1)
                 .addClass("animated")
                 .addClass(aniIn)
-            $frame.children('div').eq(1)
-                .attr("class","")
-                .css("opacity",1)
-                .addClass("animated")
-                .addClass("fadeInUp")
+            if(mobumData.frames[frame].text){
+                $frame.children('div').eq(1)
+                    .attr("class","")
+                    .css("opacity",1)
+                    .addClass("animated")
+                    .addClass("fadeInUp")
+            }
             setTimeout(function(){
                 $frame.find('img')
                     .removeClass(aniIn)
@@ -181,5 +184,11 @@
             animateRun(mobumData,frame)
         }
     }
-    animateGo()
+    Handler={
+        run:function(url){
+            if(url){AjaxUrl=url}
+            animateGo()
+        }
+    }
+    return Handler
 })(Zepto)
