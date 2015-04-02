@@ -130,67 +130,55 @@
             }
         }
     }
+    function animateRun(mobumData,frame){
+        var max=mobumData.frames.length,
+            next=nextFrame(frame,max-1)
+        if(frame<max){
+            var $frame=$frames.children("li").eq(frame),
+                aniIn=addAnimation(mobumData.frames[frame].animateIn,"in"),
+                aniOut=addAnimation(mobumData.frames[frame].animateOut,"out")
+            $frame.find('img')
+                .attr("class","")
+                .css("opacity",1)
+                .addClass("animated")
+                .addClass(aniIn)
+            $frame.children('div').eq(1)
+                .attr("class","")
+                .css("opacity",1)
+                .addClass("animated")
+                .addClass("fadeInUp")
+            setTimeout(function(){
+                $frame.find('img')
+                    .removeClass(aniIn)
+                    .addClass(aniOut)
+                $frame.children('div').eq(1)
+                    .addClass("fadeInUp")
+                    .addClass("fadeOutDown")
+            },mobumData.delay)
+            setTimeout(function(){animateGo(next)},mobumData.delay)
+        }
+    }
     function animateGo(frame){
         if(!frame){
             frame=0;
-            $.getJSON("../data/mobum.json",function(data){
-                animateInit(data)
-                mobumData=data
-                var max=mobumData.frames.length,
-                    next=nextFrame(frame,max-1)
-                if(frame<max){
-                    var $frame=$frames.children("li").eq(frame),
-                        aniIn=addAnimation(mobumData.frames[frame].animateIn,"in"),
-                        aniOut=addAnimation(mobumData.frames[frame].animateOut,"out")
-                    $frame.find('img')
-                        .attr("class","")
-                        .css("opacity",1)
-                        .addClass("animated")
-                        .addClass(aniIn)
-                    $frame.children('div').eq(1)
-                        .attr("class","")
-                        .css("opacity",1)
-                        .addClass("animated")
-                        .addClass("fadeInUp")
-                    setTimeout(function(){
-                        $frame.find('img')
-                            .removeClass(aniIn)
-                            .addClass(aniOut)
-                        $frame.children('div').eq(1)
-                            .addClass("fadeInUp")
-                            .addClass("fadeOutDown")
-                    },mobumData.delay)
-                    setTimeout(function(){animateGo(next)},mobumData.delay)
+            $.ajax
+            ({  type: "get",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "../data/mobum.json" ,  //这里是网址
+                success: function (data) {
+                    mobumData=data
+                    animateInit(mobumData,frame)
+                    animateRun(mobumData,frame)
+                },
+                timeout: 1000,
+                error: function () {
+                    animateRun(mobumData,frame)
                 }
             })
         }
         else{
-            var max=mobumData.frames.length,
-                next=nextFrame(frame,max-1)
-            if(frame<max){
-                var $frame=$frames.children().eq(frame),
-                    aniIn=addAnimation(mobumData.frames[frame].animateIn,"in"),
-                    aniOut=addAnimation(mobumData.frames[frame].animateOut,"out")
-                $frame.find('img')
-                    .attr("class","")
-                    .css("opacity",1)
-                    .addClass("animated")
-                    .addClass(aniIn)
-                $frame.children('div').eq(1)
-                    .attr("class","")
-                    .css("opacity",1)
-                    .addClass("animated")
-                    .addClass("fadeInUp")
-                setTimeout(function(){
-                    $frame.find('img')
-                        .removeClass(aniIn)
-                        .addClass(aniOut)
-                    $frame.children('div').eq(1)
-                        .addClass("fadeInUp")
-                        .addClass("fadeOutDown")
-                },mobumData.delay)
-            }
-            setTimeout(function(){animateGo(next)},mobumData.delay)
+            animateRun(mobumData,frame)
         }
     }
     animateGo()
